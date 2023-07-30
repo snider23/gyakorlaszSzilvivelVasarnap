@@ -1,0 +1,65 @@
+<div>
+  <h3>Form</h3>
+  <hr/>
+  <form [formGroup]="form" (ngSubmit)="sendData()">
+    <div class="form-group">
+      <label
+        for="name"
+        class="form-control-label"
+        [ngClass]="{'text-danger': form.get('name')?.invalid && form.get('name')?.touched || form.get('name')?.errors?.['serverError']}"
+      >
+        Name:
+      </label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        name="name"
+        placeholder="Name"
+        class="form-control"
+        [ngClass]="{'is-invalid': form.get('name')?.invalid && form.get('name')?.touched || form.get('name')?.errors?.['serverError']}"
+      >
+      <small
+        *ngIf="form.get('name')?.invalid && form.get('name')?.touched && !form.get('name')?.errors?.['serverError']"
+        class="text-danger"
+      >
+        Please enter a name
+      </small>
+      <small *ngIf="form.get('name')?.errors?.['serverError']" class="text-danger">
+        {{form.get('name')?.getError('serverError')}}
+      </small>
+    </div>
+
+
+
+    <div class="form-group">
+      <label
+        for="birthday"
+        class="form-control-label"
+        [ngClass]="{'text-danger': form.get('birthday')?.invalid && form.get('birthday')?.touched || form.get('birthday')?.errors?.['serverError']}"
+      >
+        Birthday:
+      </label>
+      <input
+        type="date"
+        id="birthday"
+        formControlName="birthday"
+        name="birthday"
+        placeholder="Birthday"
+        class="form-control"
+        [ngClass]="{'is-invalid': form.get('birthday')?.invalid && form.get('birthday')?.touched || form.get('birthday')?.errors?.['serverError']}"
+      >
+      <small
+        *ngIf="form.get('birthday')?.invalid && form.get('birthday')?.touched && !form.get('birthday')?.errors?.['serverError']"
+        class="text-danger"
+      >
+        Please enter the birthday
+      </small>
+      <small *ngIf="form.get('birthday')?.errors?.['serverError']" class="text-danger">
+        {{form.get('birthday')?.getError('serverError')}}
+      </small>
+    </div>
+
+    <button [disabled]="form.invalid" type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
